@@ -12,5 +12,9 @@ namespace ConcensionariaAPI.Interface
 
         // C - Create: cadastra um curso novo.
         void Cadastrar(Veiculo Veiculo);
+
+        void Atualizar(int id, Veiculo veiculo );
+
+        void Deletar(int id);
     }
 }

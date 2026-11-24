@@ -7,10 +7,14 @@ namespace ConcensionariaAPI.Interface
         // R - Read: devolve todos os veiculos
         List<Marca> ListarTodos();
 
-        // R - Read: busca um veiculo pelo Id (ou null se não achar).
-        Veiculo? BuscarPorNome(string nome);
+    
+        void Atualizar(int id, Marca marca);
 
         // C - Create: cadastra um curso novo.
         void Cadastrar(Marca marca);
+
+        void Deletar(int id);
+
+        Marca? BuscarPorId(int  id);
     }
 }

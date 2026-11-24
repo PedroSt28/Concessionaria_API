@@ -23,9 +23,9 @@ namespace ConcensionariaAPI.Repository
         }
 
         // INSERT INTO Curso
-        public void Cadastrar(Veiculo curso)
+        public void Cadastrar(Veiculo veiculo)
         {
-            _context.Veiculo.Add(curso);   // coloca na fila (veiculo para inserir)
+            _context.Veiculo.Add(veiculo);   // coloca na fila (veiculo para inserir)
             _context.SaveChanges();      // grava no banco
         }
 
@@ -39,6 +39,30 @@ namespace ConcensionariaAPI.Repository
         public Veiculo? BuscarPorId(int id)
         {
             return _context.Veiculo.Find(id);   // Find() -> busca pela chave primária (ou null)
+        }
+
+        public void Atualizar(int id ,Veiculo? veiculo) 
+        {
+            Veiculo? veiculo_encontrado = _context.Veiculo.Find(id, veiculo);
+            if(veiculo_encontrado != null) 
+            {
+                veiculo_encontrado.Cor = veiculo.Cor;
+                veiculo_encontrado.Placa = veiculo.Placa;
+                veiculo_encontrado.Preco = veiculo.Preco;  
+                _context.SaveChanges() ;
+
+            }
+        }
+
+        public void Deletar(int id) 
+        {
+            Veiculo? veiculo_encontrado = _context.Veiculo.Find(id);
+
+            if( veiculo_encontrado != null) 
+            {
+                _context.Veiculo.Remove(veiculo_encontrado);
+                _context.SaveChanges() ;
+            }
         }
     }
 }

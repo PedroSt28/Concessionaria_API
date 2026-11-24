@@ -30,8 +30,12 @@ builder.Services.AddDbContext<ConcessionariaContext>(options =>
 // Monta a aplicação com tudo o que foi registrado acima.
 // Daqui para baixo não dá mais para registrar serviços.
 
+builder.Services.AddControllers(o =>
+    o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
 // NOVO: quando alguém pedir ICursoRepository, a API entrega um CursoRepository.
 builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
 
 var app = builder.Build();
 

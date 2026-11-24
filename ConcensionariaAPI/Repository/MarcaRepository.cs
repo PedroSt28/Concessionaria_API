@@ -24,9 +24,9 @@ namespace ConcensionariaAPI.Repository
         }
 
         // INSERT INTO Curso
-        public void Cadastrar(Marca nome)
+        public void Cadastrar(Marca marca)
         {
-            _context.Marca.Add(nome);   // coloca na fila (marca para inserir)
+            _context.Marca.Add(marca);   // coloca na fila (marca para inserir)
             _context.SaveChanges();      // grava no banco
         }
 
@@ -39,9 +39,36 @@ namespace ConcensionariaAPI.Repository
         // SELECT * FROM Curso WHERE IdCurso = @id
        
 
-        public Veiculo? BuscarPorNome(string nome)
+        public Marca? BuscarPorId(int id)
         {
-            return _context.Veiculo.Find(nome);   // Find() -> busca pela chave primária (ou null)
+            return _context.Marca.Find(id);   // Find() -> busca pela chave primária (ou null)
         }
+
+        public void Deletar(int id)
+        {
+            Marca? marca_encontrado = _context.Marca.Find(id);
+
+            if (marca_encontrado != null)
+            {
+                _context.Marca.Remove(marca_encontrado);
+                _context.SaveChanges();
+            }
+        }
+
+            public void Atualizar(int id, Marca marca) 
+           {
+            Marca? marca_encontrada = _context.Marca.Find(id, marca);
+
+            if (marca_encontrada != null) 
+            {
+                marca_encontrada.Nome = marca.Nome;
+                marca_encontrada.PaisOrigem = marca.PaisOrigem;
+                _context.SaveChanges();
+            }
+
+           }
+
+       
     }
-}
+
+    }
